@@ -21,13 +21,52 @@ fi = (function() {
       return newArr;
     },
 
-    reduce: function() {
-
+    reduce: function(collection, iteratee, acc) {
+      accum = acc
+      for (let i = 0; i < collection.length; i++) {
+        accum = iteratee(accum, collection[i], collection)
+      }
+      return accum;
     },
 
-    functions: function() {
+    find: function(collection, predicate) {
+      if (!(collection instanceof(Array)))
+        collection = Object.values(collection)
 
+      for (let i = 0; i < collection.length; i++)
+        if (predicate(collection[i]))
+          return collection[i]
+      return undefined
     },
+
+    filter: function(collection, predicate) {
+      newArr = [];
+
+      for (let i = 0; i < collection.length; i++) {
+        if (predicate(collection[i])) {
+            newArr.push(collection[i])
+          }
+        }
+          return newArr;
+    },
+
+    size: function(collection) {
+      let newCollect = (collection instanceof(Array)) ? collection.slice() : Object.values(collection)
+
+      return newCollect.length;
+    },
+
+    first: function(collection, n) {
+      if (n) {
+        return collection.slice(0, n)
+      } else { return collection[0]; }
+    },
+
+    last: function(collection, n) {
+      if (n) {
+        return collection.slice(-n)
+      } else { return collection[collection.length-1]; }
+    }
 
 
   }

@@ -80,15 +80,14 @@ fi = (function() {
 
 
     sortBy: function(collection, iteratee) {
-      sortedArr = [];
-      if (iteratee){
-        for (let i = 0; i < collection.length; i++){
-          sortedArr.push(iteratee(collection[i]))
-          sortedArr.sort((a,b) => (a-b))
-        };
-      };
+      sortedArr = [...collection]
+
+      if (iteratee !== null){
+          return sortedArr.sort((a,b) => (iteratee(a)-iteratee(b)))
+        } else {
       sortedArr = [...collection];
-      return sortedArr.sort((a,b) => (a-b));
+          return sortedArr.sort((a,b) => (a-b));
+      }
     },
 
 

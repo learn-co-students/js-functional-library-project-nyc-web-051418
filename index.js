@@ -66,7 +66,30 @@ fi = (function() {
       if (n) {
         return collection.slice(-n)
       } else { return collection[collection.length-1]; }
-    }
+    },
+
+    compact: function(collection) {
+      newArr = [];
+      for (let i = 0; i < collection.length; i++){
+        if (collection[i]){
+          newArr.push(collection[i])
+        };
+      }
+      return newArr;
+    },
+
+
+    sortBy: function(collection, iteratee) {
+      sortedArr = [];
+      if (iteratee){
+        for (let i = 0; i < collection.length; i++){
+          sortedArr.push(iteratee(collection[i]))
+          sortedArr.sort((a,b) => (a-b))
+        };
+      };
+      sortedArr = [...collection];
+      return sortedArr.sort((a,b) => (a-b));
+    },
 
 
   }

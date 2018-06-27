@@ -17,9 +17,7 @@ fi = (function() {
       for (let i = 0; i < objectToIterate.length; i++) {
       //  alert(iteratee(objectToIterate[i], i, objectToIterate));
       }
-
       return collection;
-
     },
 
     map: function(collection,iteratee) {
@@ -143,7 +141,36 @@ fi = (function() {
     // },
 
 
-    uniq: function(array) {
+    uniq: function(array, isSorted, iteratee) {
+        let uniqArray = [];
+
+        if (isSorted === true) {
+            for (let i = 0; i < array.length; i++) {
+              if (array[i] !== array[i + 1]){
+                uniqArray.push(array[i]);
+              }
+            }
+        }
+
+        else if (iteratee) {
+          for (let i = 0; i < array.length; i++) {
+            if ( uniqArray.indexOf(iteratee(array[i])) === -1 ) {
+              uniqArray.push(array[i])
+            };
+          };
+        }
+
+        else {
+          for (let i = 0; i < array.length; i++) {
+            if ( uniqArray.indexOf(array[i]) === -1 ) {
+              uniqArray.push(array[i])
+            };
+          };
+
+        }
+        return uniqArray;
+
+
         // uniqArray = [...array];
         //
         // // let uniqArray = [];
@@ -151,8 +178,6 @@ fi = (function() {
         // check_for_dup = (function (a,b) {
         //   return (iteratee(a) == iteratee(b));
         // });
-
-
 
     },
 

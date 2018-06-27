@@ -15,7 +15,7 @@ fi = (function() {
       // });
 
       for (let i = 0; i < objectToIterate.length; i++) {
-        // alert(iteratee(objectToIterate[i], i, objectToIterate));
+      //  alert(iteratee(objectToIterate[i], i, objectToIterate));
       }
 
       return collection;
@@ -29,7 +29,7 @@ fi = (function() {
       // objectToIterate.forEach(function(element) {
       //   value = iteratee(element, objectToIterate.indexOf(element), objectToIterate)
       //   mappedArray.push(value);
-      //   // debugger
+      //   //
       // });
 
       for (let i = 0; i < objectToIterate.length; i++) {
@@ -109,25 +109,31 @@ fi = (function() {
 
 
     sortBy: function(collection,iteratee) {
-      sortedArray = [];
-      for(let i = 0; i < collection.length; i++) {
+      sortedArray = [...collection];
+
+      sorting_algorithim = (function (a,b) {
+        return (iteratee(a) - iteratee(b));
+      });
+
+      return sortedArray.sort(sorting_algorithim);
+      },
+      // if (typeof collection[i] === "number") {
+      //   collection.sort(function (a,b) {
+      //     return iteratee(a) > iteratee(b);
+      //   })
+      //   // difference = iteratee(collection[i] - collection[i+1])
+      //   // return collection.sort(difference )
+      // }
+      // else if (typeof collection[i] === "string") {
+      //   collection.sort(function (a,b) {
+      //     return collection(a.localeCompare(b));
+      //   });
+      //   // return collection[i].localeCompare(collection[i+1])
+      //   }
+      //   return sortedArray;
 
 
 
-
-        if (typeof collection[i] === "number") {
-          debugger
-          difference = iteratee(collection[i] - collection[i+1])
-          return collection.sort(difference )
-        }
-        else if (typeof collection[i] === "string") {
-          debugger
-          return collection[i].localeCompare(collection[i+1])
-        }
-      }
-
-      return sortedArray;
-    },
 
 
 
@@ -135,15 +141,17 @@ fi = (function() {
     // flatten: function(collection) {
     //
     // },
-    //
-    // uniq: function(collection) {
-    //
-    // },
 
-    uniq: function(collection) {
 
-        // let uniqArray = [];
-        // for(let i =0 ; i < collection.length; i++)
+    uniq: function(array) {
+        // uniqArray = [...array];
+        //
+        // // let uniqArray = [];
+        // // for(let i =0 ; i < collection.length; i++)
+        // check_for_dup = (function (a,b) {
+        //   return (iteratee(a) == iteratee(b));
+        // });
+
 
 
     },
@@ -152,7 +160,7 @@ fi = (function() {
 
       let keyArray = [];
       for (const key in collection) {
-        // debugger
+        //
         keyArray.push(key);
       }
 
@@ -163,13 +171,22 @@ fi = (function() {
 
       let keyArray = [];
       for (const key in collection) {
-        // debugger
+        //
         keyArray.push(collection[key]);
       }
 
       return keyArray;
     },
 
+    functions: function(collection) {
+      let sortedCollection = [];
+      for (const key in collection) {
+        if (typeof collection[key] ===  "function") {
+          sortedCollection.push(collection[key]);
+        }
+      }
+      return sortedCollection;
+    },
 
   }
 })()

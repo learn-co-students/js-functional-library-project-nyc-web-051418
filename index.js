@@ -15,7 +15,7 @@ fi = (function() {
       // });
 
       for (let i = 0; i < objectToIterate.length; i++) {
-      //  alert(iteratee(objectToIterate[i], i, objectToIterate));
+        alert(iteratee(objectToIterate[i], i, objectToIterate));
       }
       return collection;
     },
@@ -132,13 +132,33 @@ fi = (function() {
 
 
 
+    flatten: function(collection, shallow, flattenedArray = []) {
 
+          for (let i = 0; i < collection.length; i++) {
 
+              if (!Array.isArray(collection[i])) {
+                flattenedArray.push(collection[i])
+              }
 
+              else if (shallow) {
+                if (Array.isArray(collection[i])){
+                  for (let c = 0; c < (collection[i]).length; c++) {
+                    // debugger;
+                    flattenedArray.push(collection[i][c])
+                  }
+                }
 
-    // flatten: function(collection) {
-    //
-    // },
+              }
+
+              else {
+                //  debugger;
+                this.flatten(collection[i], false, flattenedArray);
+              };
+
+          }
+
+        return flattenedArray;
+    },
 
 
     uniq: function(array, isSorted, iteratee) {

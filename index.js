@@ -153,9 +153,11 @@ fi = (function() {
         }
 
         else if (iteratee) {
+          let uniqIterateeArray = []
           for (let i = 0; i < array.length; i++) {
-            if ( uniqArray.indexOf(iteratee(array[i])) === -1 ) {
-              uniqArray.push(array[i])
+            if ( uniqIterateeArray.indexOf(iteratee(array[i])) === -1 ) {
+              uniqIterateeArray.push(iteratee(array[i]));
+              uniqArray.push(array[i]);
             };
           };
         }
